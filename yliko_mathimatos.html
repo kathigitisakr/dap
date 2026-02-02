@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📚 Υλικό Μαθήματος - Διοίκηση Εκπαίδευσης</title>
+    <link rel="stylesheet" href="study-notes.css">
+    <style>
+        /* Extra styles for PDF links page */
+        .pdf-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .pdf-card {
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 15px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-dark);
+        }
+        
+        .pdf-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-color: var(--primary);
+        }
+        
+        .pdf-icon {
+            font-size: 2.5rem;
+            flex-shrink: 0;
+        }
+        
+        .pdf-info {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .pdf-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--primary);
+            line-height: 1.3;
+            word-wrap: break-word;
+        }
+        
+        .pdf-folder {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+        
+        .category-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin: 30px 0 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .category-header h2 {
+            font-size: 1.3rem;
+            margin: 0;
+        }
+        
+        .category-header .count {
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .category-header.manolis { background: linear-gradient(135deg, #1565c0 0%, #1976d2 100%); }
+        .category-header.babis { background: linear-gradient(135deg, #5d4037 0%, #795548 100%); }
+        .category-header.marina { background: linear-gradient(135deg, #7b1fa2 0%, #9c27b0 100%); }
+        .category-header.original { background: linear-gradient(135deg, #2e7d32 0%, #43a047 100%); }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link:hover {
+            background: var(--primary-light);
+            transform: translateX(-5px);
+        }
+        
+        .stats-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 10px 20px;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 30px;
+            margin: 20px 0;
+            transition: border-color 0.3s ease;
+        }
+        
+        .search-box:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        @media (max-width: 768px) {
+            .pdf-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="notes-container">
+        <!-- Header -->
+        <header class="notes-header">
+            <div class="unit-number">📚 Αρχείο Υλικού</div>
+            <h1>Υλικό Μαθήματος</h1>
+            <p class="subtitle">Διοίκηση Εκπαίδευσης - Όλα τα PDFs</p>
+        </header>
+        
+        <!-- Content -->
+        <div class="notes-content">
+            <a href="odigos_mathimatos.html" class="back-link">
+                ← Επιστροφή στον Οδηγό Μελέτης
+            </a>
+            
+            <!-- Stats -->
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <div class="stat-number">35</div>
+                    <div class="stat-label">Συνολικά PDFs</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">Κατηγορίες</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">11</div>
+                    <div class="stat-label">Μαθήματα</div>
+                </div>
+            </div>
+            
+            <!-- Search -->
+            <input type="text" class="search-box" id="searchBox" placeholder="🔍 Αναζήτηση αρχείου...">
+            
+            <!-- ΣΗΜΕΙΩΣΕΙΣ ΜΑΝΟΛΗΣ -->
+            <div class="category-header manolis">
+                <span style="font-size: 1.8rem;">📝</span>
+                <h2>Σημειώσεις Μανώλης</h2>
+                <span class="count">5 αρχεία</span>
+            </div>
+            <div class="pdf-grid" id="cat-manolis">
+                <a href="pdf/%CE%A3%CE%97%CE%9C%CE%95%CE%99%CE%A9%CE%A3%CE%95%CE%99%CE%A3%20%CE%9C%CE%91%CE%9D%CE%9F%CE%9B%CE%97%CE%A3/1-%CE%9F%CF%81%CE%B3%CE%AC%CE%BD%CF%89%CF%83%CE%B7_%CE%95%CE%BA%CF%80%CE%B1%CE%AF%CE%B4%CE%B5%CF%85%CF%83%CE%B7%CF%82_%CE%9F%CE%B4%CE%B7%CE%B3%CF%8C%CF%82_%CE%95%CE%BE%CE%B5%CF%84%CE%AC%CF%83%CE%B5%CF%89%CE%BD.pdf" class="pdf-card" target="_blank">
+                    <span class="pdf-icon">📄</span>
+                    <div class="pdf-info">
+                        <div class="pdf-title">Οργάνωση Εκπαίδευσης - Οδηγός Εξετάσεων</div>
+                        <div class="pdf-folder">Οδηγός μελέτης για εξετάσεις</div>
+                    </div>
+                </a>
+                
+                <a href="pdf/%CE%A3%CE%97%CE%9C%CE%95%CE%99%CE%A9%CE%A3%CE%95%CE%99%CE%A3%20%CE%9C%CE%91%CE%9D%CE%9F%CE%9B%CE%97%CE%A3/1-%CE%9F%CE%9B%CE%95%CE%A3%20%CE%9F%CE%99%20%CE%95%CE%99%CE%9A%CE%9F%CE%9D%CE%95%CE%A3.pdf" class="pdf-card" target="_blank">
+                    <span class="pdf-icon">🖼️</span>
+                    <div class="pdf-info">
+                        <div class="pdf-title">ΟΛΕΣ ΟΙ ΕΙΚΟΝΕΣ</div>
+                        <div class="pdf-folder">Συλλογή διαγραμμάτων & εικόνων</div>
+                    </div>
+                </a>
+                
+                <a href="pdf/%CE%A3%CE%97%CE%9C%CE%95%CE%99%CE%A9%CE%A3%CE%95%CE%99%CE%A3%20%CE%9C%CE%91%CE%9D%CE%9F%CE%9B%CE%97%CE%A3/0-%CE%A3%CE%9F%CE%A3.pdf" class="pdf-card" target="_blank">
+                    <span class="pdf-icon">⚠️</span>
+                    <div class="pdf-info">
+                        <div class="pdf-title">ΣΟΣ - Σημαντικά Σημεία</div>
+                        <div class="pdf-folder">Κρίσιμα σημεία για εξετάσεις</div>
+                    </div>
+                </a>
+                
+                <a href="pdf/%CE%A3%CE%97%CE%9C%CE%95%CE%99%CE%A9%CE%A3%CE%95%CE%99%CE%A3%20%CE%9C%CE%91%CE%9D%CE%9F%CE%9B%CE%97%CE%A3/0-%CE%98%CE%95%CE%A9%CE%A1%CE%99%CE%91%20%CE%BF%CE%BB%CE%B1.pdf" class="pdf-card" target="_blank">
+                    <span class="pdf-icon">📚</span>
+                    <div class="pdf-info">
+                        <div class="pdf-title">ΘΕΩΡΙΑ - Όλα τα κεφάλαια</div>
+                        <div class="pdf-folder">Πλήρης θεωρία μαθήματος</div>
+                    </div>
+                </a>
+                
+                <a href="pdf/%CE%A3%CE%97%CE%9C%CE%95%CE%99%CE%A9%CE%A3%CE%95%CE%99%CE%A3%20%CE%9C%CE%91%CE%9D%CE%9F%CE%9B%CE%97%CE%A3/0-%CE%94%CE%A1%CE%91%CE%A3%CE%A4%CE%97%CE%A1%CE%99%CE%9F%CE%A4%CE%97%CE%A4%CE%95%CE%A3%20%CE%9F%CE%9B%CE%95%CE%A3-%CE%BC%CE%B1%CE%BD%CE%BF%CE%BB%CE%B7%CF%82.pdf" class="pdf-card" target="_blank">
+                    <span class="pdf-icon">✍️</span>
+                    <div class="pdf-info">
+                        <div class="pdf-title">ΔΡΑΣΤΗΡΙΟΤΗΤΕΣ ΟΛΕΣ</div>
+                        <div class="pdf-folder">Συγκεντρωτικές δραστηριότητες</div>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- ΘΕΩΡΙΑ ΜΠΑΜΠΗΣ -->
+            <div class="category-header babis">
+                <span style="font-size: 1.8rem;">📖</span>
+                <h2>Θεωρία Μπάμπης</h2>
+                <span class="count">3 αρχεία</span>
+            </div>
+            <div class="pdf-grid" id="cat-babis">
+                <a href="pdf/%CE%98%CE%95%CE%A9%CE%A1%CE%99%CE%91%20%CE%9C%CE%A0%CE%91%CE%9C%CE%A0%CE%97%CE%A3/0-%CE%A3%CE%97%CE%9C%CE%95%CE%99%CE%A9%CE%A3%CE%95%CE%99%CE%A3%20%CE%9A%CE%91%CE%A1%CE%91%CE%9D%CE%99%CE%9A%CE%9F%CE%9B%CE%91.pdf" class="pdf-card" target="_blank">
+                    <span class="pdf-icon">📋</span>
+                    <div class="pdf-info">
+                        <div class="pdf-title">Σημειώσεις Καρανικόλα</div>
+                        <div class="pdf-folder">Πλήρεις σημειώσεις θεωρίας</div>
+                    </div>
+                </a>
+                
+                <a href="pdf/%CE%98%CE%95%CE%A9%CE%A1%CE%99%CE%91%20%CE%9C%CE%A0%CE%91%CE%9C%CE%A0%CE%97%CE%A3/0-%CE%A3%CE%9A%CE%9F%CE%9D%CE%91%CE%9A%CE%99.pdf" class="pdf-card" target="_blank">
+                    <span class="pdf-icon">📝</span>
+                    <div class="pdf-info">
+                        <div class="pdf-title">Σκονάκι</div>
+                        <div class="pdf-folder">Συνοπτικές σημειώσεις</div>
+                    </div>
+                </a>
+                
+                <a href="pdf/%CE%98%CE%95%CE%A9%CE%A1%CE%99%CE%91%20%CE%9C%CE%A0%CE%91%CE%9C%CE%A0%CE%97%CE%A3/%CE%98%CE%AD%CE%BC%CE%B1%CF%84%CE%B1%202023-2024%20%CE%94%CE%99%CE%9F%CE%99%CE%9A%CE%97%CE%A3%CE%97%20%CE%91%CE%9D%CE%98%CE%A1%CE%A9%CE%A0%CE%99%CE%9D%CE%9F%CE%A5%20%CE%94%CE%A5%CE%9D%CE%91%CE%9C%CE%99%CE%9A%CE%9F%CE%A5.pdf" class="pdf-card" target="_blank">
+                    <span class="pdf-icon">📝</span>
+                    <div class="pdf-info">
+                        <div class="pdf-title">Θέματα 2023-2024</div>
+                        <div class="pdf-folder">Παλαιότερα θέματα εξετάσεων</div>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- ΔΡΑΣΤΗΡΙΟΤΗΤΕΣ ΜΑΡΙΝΑ -->
+            <div class="category-header marina">
+                <span style="font-size: 1.8rem;">✏️</span>
+                <h2>Δραστηριότητες Μαρίνα</h2>
+                <span class="count">9 αρχεία</span>
+            </div>
+            <div class="pdf-grid" id="cat-marina">
+                <a href="pdf/%CE%94%CF%81%CE%B1%CF%83%CF%84%CE%B7%CF%81%CE%B9%CF%8C%CF%84%CE%B7%CF%84%CE%B5%CF%82%20%CE%9C%CE%91%CE%A1%CE%99%CE%9D%CE%91/%CE%94%CE%A1%CE%91%CE%A3%CE%A4%CE%97%CE%A1%CE%99%CE%9F%CE%A4%CE%97%CE%A4%CE%95%CE%A3%201%CE%BF%CF%85%20-2%CE%BF%CF%85%20%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%9F%CE%A3.pdf" class="pdf-card" target="_blank">
+                    <span class="pdf-icon">1️⃣</span>
+                    <div class="pdf-info">
+                        <div class="pdf-title">Δραστηριότητες 1ου-2ου Μαθήματος</div>
+                        <div class="pdf-folder">Ηγεσία & Διοίκηση</div>
+                    </div>
+                </a>
+                
+                <a href="pdf/%CE%94%CF%81%CE%B1%CF%83%CF%84%CE%B7%CF%81%CE%B9%CF%8C%CF%84%CE%B7%CF%84%CE%B5%CF%82%20%CE%9C%CE%91%CE%A1%CE%99%CE%9D%CE%91/%CE%94%CE%A1%CE%91%CE%A3%CE%A4%CE%97%CE%A1%CE%99%CE%9F%CE%A4%CE%97%CE%A4%CE%95%CE%A3%203%CE%BF%CF%85%20%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%9F%CE%A3.pdf" class="pdf-card" target="_blank">
+                    <span class="pdf-icon">3️⃣</span>
+                    <div class="pdf-info">
+                        <div class="pdf-title">Δραστηριότητες 3ου Μαθήματος</div>
+                        <div class="pdf-folder">Σχολείο ως Οργανισμός</div>
+                    </div>
+                </a>
+                
+                <a href="pdf/%CE%94%CF%81%CE%B1%CF%83%CF%84%CE%B7%CF%81%CE%B9%CF%8C%CF%84%CE%B7%CF%84%CE%B5%CF%82%20%CE%9C%CE%91%CE%A1%CE%99%CE%9D%CE%91/%CE%94%CE%A1%CE%91%CE%A3%CE%A4%CE%97%CE%A1%CE%99%CE%9F%CE%A4%CE%97%CE%A4%CE%95%CE%A3%204%CE%BF%CF%85%20%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%9F%CE%A3.pdf" class="pdf-card" target="_blank">
+                    <span class="pdf-icon">4️⃣</span>
+                    <div class="pdf-info">
+                        <div class="pdf-title">Δραστηριότητες 4ου Μαθήματος</div>
+                        <div class="pdf-folder">Οργανωσιακή Κουλτούρα</div>
+                    </div>
+                </a>
+                
+                <a href="pdf/%CE%94%CF%81%CE%B1%CF%83%CF%84%CE%B7%CF%81%CE%B9%CF%8C%CF%84%CE%B7%CF%84%CE%B5%CF%82%20%CE%9C%CE%91%CE%A1%CE%99%CE%9D%CE%91/%CE%94%CE%A1%CE%91%CE%A3%CE%A4%CE%97%CE%A1%CE%99%CE%9F%CE%A4%CE%97%CE%A4%CE%95%CE%A3%205%CE%BF%CF%85%20%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%9F%CE%A3%20%CE%9F%CE%A1%CE%93%CE%91%CE%9D%CE%99%CE%A3%CE%9C%CE%9F%CE%A3%20%CE%A0%CE%9F%CE%A5%20%CE%9C%CE%91%CE%98%CE%91%CE%99%CE%9D%CE%95%CE%99.pdf" class="pdf-card" target="_blank">
+                    <span class="pdf-icon">5️⃣</span>
+                    <div class="pdf-info">
+                        <div class="pdf-title">Δραστηριότητες 5ου Μαθήματος</div>
+                        <div class="pdf-folder">Οργανισμός που Μαθαίνει</div>
+                    </div>
+                </a>
+                
+                <a href="pdf/%CE%94%CF%81%CE%B1%CF%83%CF%84%CE%B7%CF%81%CE%B9%CF%8C%CF%84%CE%B7%CF%84%CE%B5%CF%82%20%CE%9C%CE%91%CE%A1%CE%99%CE%9D%CE%91/%CE%94%CE%A1%CE%91%CE%A3%CE%A4%CE%97%CE%A1%CE%99%CE%9F%CE%A4%CE%97%CE%A4%CE%95%CE%A3%206%CE%BF%CF%85%20%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%9F%CE%A3%20%CE%95%CE%A0%CE%99%CE%9A%CE%9F%CE%99%CE%9D%CE%A9%CE%9D%CE%99%CE%91%20%CE%A3%CE%A5%CE%93%CE%9A%CE%A1%CE%9F%CE%A5%CE%A3%CE%95%CE%99%CE%A3.pdf" class="pdf-card" target="_blank">
+                    <span class="pdf-icon">6️⃣</span>
+                    <div class="pdf-info">
+                        <div class="pdf-title">Δραστηριότητες 6ου Μαθήματος</div>
+                        <div class="pdf-folder">Επικοινωνία & Συγκρούσεις</div>
+                    </div>
+                </a>
+                
+                <a href="pdf/%CE%94%CF%81%CE%B1%CF%83%CF%84%CE%B7%CF%81%CE%B9%CF%8C%CF%84%CE%B7%CF%84%CE%B5%CF%82%20%CE%9C%CE%91%CE%A1%CE%99%CE%9D%CE%91/%CE%94%CE%A1%CE%91%CE%A3%CE%A4%CE%97%CE%A1%CE%99%CE%9F%CE%A4%CE%97%CE%A4%CE%95%CE%A3%207%CE%BF%CF%85%20%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%9F%CE%A3%20%CE%A3%CE%A5%CE%9D%CE%91%CE%99%CE%A3%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%99%CE%9A%CE%97%20%CE%9D%CE%9F%CE%97%CE%9C%CE%9F%CE%A3%CE%A5%CE%9D%CE%97.pdf" class="pdf-card" target="_blank">
+                    <span class="pdf-icon">7️⃣</span>
+                    <div class="pdf-info">
+                        <div class="pdf-title">Δραστηριότητες 7ου Μαθήματος</div>
+                        <div class="pdf-folder">Συναισθηματική Νοημοσύνη</div>
+                    </div>
+                </a>
+                
+                <a href="pdf/%CE%94%CF%81%CE%B1%CF%83%CF%84%CE%B7%CF%81%CE%B9%CF%8C%CF%84%CE%B7%CF%84%CE%B5%CF%82%20%CE%9C%CE%91%CE%A1%CE%99%CE%9D%CE%91/%CE%94%CE%A1%CE%91%CE%A3%CE%A4%CE%97%CE%A1%CE%99%CE%9F%CE%A4%CE%97%CE%A4%CE%95%CE%A3%208%CE%BF%CF%85%20-9%CE%BF%CF%85%20%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%9F%CE%A3%20-%20%CE%91%CE%9E%CE%99%CE%9F%CE%9B%CE%9F%CE%93%CE%97%CE%A3%CE%97.pdf" class="pdf-card" target="_blank">
+                    <span class="pdf-icon">8️⃣</span>
+                    <div class="pdf-info">
+                        <div class="pdf-title">Δραστηριότητες 8ου-9ου Μαθήματος</div>
+                        <div class="pdf-folder">Αξιολόγηση</div>
+                    </div>
+                </a>
+                
+                <a href="pdf/%CE%94%CF%81%CE%B1%CF%83%CF%84%CE%B7%CF%81%CE%B9%CF%8C%CF%84%CE%B7%CF%84%CE%B5%CF%82%20%CE%9C%CE%91%CE%A1%CE%99%CE%9D%CE%91/%CE%94%CE%A1%CE%91%CE%A3%CE%A4%CE%97%CE%A1%CE%99%CE%9F%CE%A4%CE%97%CE%A4%CE%95%CE%A3%2010%CE%BF%CF%85%20%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%9F%CE%A3%20-%CE%94%CE%99%CE%91%CE%A7%CE%95%CE%99%CE%A1%CE%99%CE%A3%CE%97%20%CE%91%CE%9B%CE%9B%CE%91%CE%93%CE%97%CE%A3%20%CE%91%CE%9D%CE%9F%CE%99%CE%9A%CE%A4%CE%9F%20%CE%A3%CE%A7%CE%9F%CE%9B%CE%95%CE%99%CE%9F.pdf" class="pdf-card" target="_blank">
+                    <span class="pdf-icon">🔟</span>
+                    <div class="pdf-info">
+                        <div class="pdf-title">Δραστηριότητες 10ου Μαθήματος</div>
+                        <div class="pdf-folder">Διαχείριση Αλλαγής - Ανοικτό Σχολείο</div>
+                    </div>
+                </a>
+                
+                <a href="pdf/%CE%94%CF%81%CE%B1%CF%83%CF%84%CE%B7%CF%81%CE%B9%CF%8C%CF%84%CE%B7%CF%84%CE%B5%CF%82%20%CE%9C%CE%91%CE%A1%CE%99%CE%9D%CE%91/%CE%94%CE%A1%CE%91%CE%A3%CE%A4%CE%97%CE%A1%CE%99%CE%9F%CE%A4%CE%97%CE%A4%CE%95%CE%A3%2011%CE%BF%CF%85%20%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%9F%CE%A3%20%CE%A0%CE%91%CE%A1%CE%91%CE%9A%CE%99%CE%9D%CE%97%CE%A3%CE%97.pdf" class="pdf-card" target="_blank">
+                    <span class="pdf-icon">1️⃣1️⃣</span>
+                    <div class="pdf-info">
+                        <div class="pdf-title">Δραστηριότητες 11ου Μαθήματος</div>
+                        <div class="pdf-folder">Παρακίνηση</div>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- ΑΡΧΙΚΕΣ ΜΑΘΗΜΑΤΟΣ -->
+            <div class="category-header original">
+                <span style="font-size: 1.8rem;">🎓</span>
+                <h2>Αρχικές Παρουσιάσεις Μαθήματος</h2>
+                <span class="count">18 αρχεία</span>
+            </div>
+            <div class="pdf-grid" id="cat-original">
+                <!-- Μάθημα 1-2 -->
+                <a href="pdf/%CE%91%CE%A1%CE%A7%CE%99%CE%9A%CE%95%CE%A3%20%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%9F%CE%A3/1-2%20%CE%94%CE%99%CE%9F%CE%99%CE%9A%CE%97%CE%A3%CE%97%20%CE%91%CE%9D%CE%98%CE%A1%CE%A9%CE%A0%CE%99%CE%9D%CE%A9%CE%9D%20%CE%A0%CE%9F%CE%A1%CE%A9%CE%9D%20%CE%91%CE%9D%CE%98%CE%A1%CE%A9%CE%A0%CE%99%CE%9D%CE%9F%20%CE%9A%CE%95%CE%A6%CE%91%CE%9B%CE%91%CE%99%CE%9F.pdf" class="pdf-card" target="_blank">
+                    <span class="pdf-icon">📊</span>
+                    <div class="pdf-info">
+                        <div class="pdf-title">Μάθημα 1-2: Διοίκηση Ανθρώπινων Πόρων</div>
+                        <div class="pdf-folder">Παρουσίαση</div>
+                    </div>
+                </a>
+                
+                <a href="pdf/%CE%91%CE%A1%CE%A7%CE%99%CE%9A%CE%95%CE%A3%20%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%9F%CE%A3/1-2%20%CE%94%CE%A1%CE%91%CE%A3%CE%A4%CE%97%CE%A1%CE%99%CE%9F%CE%A4%CE%97%CE%A4%CE%95%CE%A3%201%CE%BF%CF%85%20-2%CE%BF%CF%85%20%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%9F%CE%A3.pdf" class="pdf-card" target="_blank">
+                    <span class="pdf-icon">✏️</span>
+                    <div class="pdf-info">
+                        <div class="pdf-title">Μάθημα 1-2: Δραστηριότητες</div>
+                        <div class="pdf-folder">Ηγεσία & Διοίκηση</div>
+                    </div>
+                </a>
+                
+                <!-- Μάθημα 3 -->
+                <a href="pdf/%CE%91%CE%A1%CE%A7%CE%99%CE%9A%CE%95%CE%A3%20%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%9F%CE%A3/3%20%CE%A0%CE%91%CE%A1%CE%9F%CE%A5%CE%A3%CE%99%CE%91%CE%A3%CE%97%203.pdf" class="pdf-card" target="_blank">
+                    <span class="pdf-icon">📊</span>
+                    <div class="pdf-info">
+                        <div class="pdf-title">Μάθημα 3: Παρουσίαση</div>
+                        <div class="pdf-folder">Σχολείο ως Οργανισμός</div>
+                    </div>
+                </a>
+                
+                <a href="pdf/%CE%91%CE%A1%CE%A7%CE%99%CE%9A%CE%95%CE%A3%20%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%9F%CE%A3/3%20%CE%94%CE%A1%CE%91%CE%A3%CE%A4%CE%97%CE%A1%CE%99%CE%9F%CE%A4%CE%97%CE%A4%CE%95%CE%A3%203%CE%BF%CF%85%20%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%9F%CE%A3.pdf" class="pdf-card" target="_blank">
+                    <span class="pdf-icon">✏️</span>
+                    <div class="pdf-info">
+                        <div class="pdf-title">Μάθημα 3: Δραστηριότητες</div>
+                        <div class="pdf-folder">Σχολείο ως Οργανισμός</div>
+                    </div>
+                </a>
+                
+                <!-- Μάθημα 4 -->
+                <a href="pdf/%CE%91%CE%A1%CE%A7%CE%99%CE%9A%CE%95%CE%A3%20%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%9F%CE%A3/4%20%CE%A0%CE%91%CE%A1%CE%9F%CE%A5%CE%A3%CE%99%CE%91%CE%A3%CE%97%204.pdf" class="pdf-card" target="_blank">
+                    <span class="pdf-icon">📊</span>
+                    <div class="pdf-info">
+                        <div class="pdf-title">Μάθημα 4: Παρουσίαση</div>
+                        <div class="pdf-folder">Οργανωσιακή Κουλτούρα</div>
+                    </div>
+                </a>
+                
+                <a href="pdf/%CE%91%CE%A1%CE%A7%CE%99%CE%9A%CE%95%CE%A3%20%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%9F%CE%A3/4%20%CE%94%CE%A1%CE%91%CE%A3%CE%A4%CE%97%CE%A1%CE%99%CE%9F%CE%A4%CE%97%CE%A4%CE%95%CE%A3%204%CE%BF%CF%85%20%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%9F%CE%A3.pdf" class="pdf-card" target="_blank">
+                    <span class="pdf-icon">✏️</span>
+                    <div class="pdf-info">
+                        <div class="pdf-title">Μάθημα 4: Δραστηριότητες</div>
+                        <div class="pdf-folder">Οργανωσιακή Κουλτούρα</div>
+                    </div>
+                </a>
+                
+                <!-- Μάθημα 5 -->
+                <a href="pdf/%CE%91%CE%A1%CE%A7%CE%99%CE%9A%CE%95%CE%A3%20%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%9F%CE%A3/5%20%CE%A0%CE%91%CE%A1%CE%9F%CE%A5%CE%A3%CE%99%CE%91%CE%A3%CE%97%205.pdf" class="pdf-card" target="_blank">
+                    <span class="pdf-icon">📊</span>
+                    <div class="pdf-info">
+                        <div class="pdf-title">Μάθημα 5: Παρουσίαση</div>
+                        <div class="pdf-folder">Οργανισμός που Μαθαίνει</div>
+                    </div>
+                </a>
+                
+                <a href="pdf/%CE%91%CE%A1%CE%A7%CE%99%CE%9A%CE%95%CE%A3%20%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%9F%CE%A3/5%20%CE%94%CE%A1%CE%91%CE%A3%CE%A4%CE%97%CE%A1%CE%99%CE%9F%CE%A4%CE%97%CE%A4%CE%95%CE%A3%205%CE%BF%CF%85%20%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%9F%CE%A3.pdf" class="pdf-card" target="_blank">
+                    <span class="pdf-icon">✏️</span>
+                    <div class="pdf-info">
+                        <div class="pdf-title">Μάθημα 5: Δραστηριότητες</div>
+                        <div class="pdf-folder">Οργανισμός που Μαθαίνει</div>
+                    </div>
+                </a>
+                
+                <!-- Μάθημα 6 -->
+                <a href="pdf/%CE%91%CE%A1%CE%A7%CE%99%CE%9A%CE%95%CE%A3%20%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%9F%CE%A3/6%20%CE%95%CE%A0%CE%99%CE%9A%CE%9F%CE%99%CE%9D%CE%A9%CE%9D%CE%99%CE%91%20%26%20%CE%94%CE%99%CE%91%CE%A7%CE%95%CE%99%CE%A1%CE%99%CE%A3%CE%97%20%CE%A3%CE%A5%CE%93%CE%9A%CE%A1%CE%9F%CE%A5%CE%A3%CE%95%CE%A9%CE%9D%20%CE%A3%CE%A4%CE%9F%CE%9D%20%CE%A7%CE%A9%CE%A1%CE%9F%20%CE%95%CE%A1%CE%93%CE%91%CE%A3%CE%99%CE%91%CE%A3%202.pdf" class="pdf-card" target="_blank">
+                    <span class="pdf-icon">📊</span>
+                    <div class="pdf-info">
+                        <div class="pdf-title">Μάθημα 6: Επικοινωνία & Συγκρούσεις</div>
+                        <div class="pdf-folder">Παρουσίαση</div>
+                    </div>
+                </a>
+                
+                <a href="pdf/%CE%91%CE%A1%CE%A7%CE%99%CE%9A%CE%95%CE%A3%20%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%9F%CE%A3/6%20%CE%94%CE%A1%CE%91%CE%A3%CE%A4%CE%97%CE%A1%CE%99%CE%9F%CE%A4%CE%97%CE%A4%CE%95%CE%A3%206%CE%BF%CF%85%20%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%9F%CE%A3.pdf" class="pdf-card" target="_blank">
+                    <span class="pdf-icon">✏️</span>
+                    <div class="pdf-info">
+                        <div class="pdf-title">Μάθημα 6: Δραστηριότητες</div>
+                        <div class="pdf-folder">Επικοινωνία & Συγκρούσεις</div>
+                    </div>
+                </a>
+                
+                <!-- Μάθημα 7 -->
+                <a href="pdf/%CE%91%CE%A1%CE%A7%CE%99%CE%9A%CE%95%CE%A3%20%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%9F%CE%A3/7%20%CE%A0%CE%91%CE%A1%CE%9F%CE%A5%CE%A3%CE%99%CE%91%CE%A3%CE%97%207.pdf" class="pdf-card" target="_blank">
+                    <span class="pdf-icon">📊</span>
+                    <div class="pdf-info">
+                        <div class="pdf-title">Μάθημα 7: Παρουσίαση</div>
+                        <div class="pdf-folder">Συναισθηματική Νοημοσύνη</div>
+                    </div>
+                </a>
+                
+                <a href="pdf/%CE%91%CE%A1%CE%A7%CE%99%CE%9A%CE%95%CE%A3%20%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%9F%CE%A3/7%20%CE%94%CE%A1%CE%91%CE%A3%CE%A4%CE%97%CE%A1%CE%99%CE%9F%CE%A4%CE%97%CE%A4%CE%95%CE%A3%207%CE%BF%CF%85%20%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%9F%CE%A3.pdf" class="pdf-card" target="_blank">
+                    <span class="pdf-icon">✏️</span>
+                    <div class="pdf-info">
+                        <div class="pdf-title">Μάθημα 7: Δραστηριότητες</div>
+                        <div class="pdf-folder">Συναισθηματική Νοημοσύνη</div>
+                    </div>
+                </a>
+                
+                <!-- Μάθημα 8 -->
+                <a href="pdf/%CE%91%CE%A1%CE%A7%CE%99%CE%9A%CE%95%CE%A3%20%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%9F%CE%A3/8%20%CE%A0%CE%91%CE%A1%CE%9F%CE%A5%CE%A3%CE%99%CE%91%CE%A3%CE%97%208.pdf" class="pdf-card" target="_blank">
+                    <span class="pdf-icon">📊</span>
+                    <div class="pdf-info">
+                        <div class="pdf-title">Μάθημα 8: Παρουσίαση</div>
+                        <div class="pdf-folder">Αξιολόγηση (Μέρος Α)</div>
+                    </div>
+                </a>
+                
+                <!-- Μάθημα 9 -->
+                <a href="pdf/%CE%91%CE%A1%CE%A7%CE%99%CE%9A%CE%95%CE%A3%20%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%9F%CE%A3/9%20%CE%A0%CE%91%CE%A1%CE%9F%CE%A5%CE%A3%CE%99%CE%91%CE%A3%CE%97%209.pdf" class="pdf-card" target="_blank">
+                    <span class="pdf-icon">📊</span>
+                    <div class="pdf-info">
+                        <div class="pdf-title">Μάθημα 9: Παρουσίαση</div>
+                        <div class="pdf-folder">Αξιολόγηση (Μέρος Β)</div>
+                    </div>
+                </a>
+                
+                <a href="pdf/%CE%91%CE%A1%CE%A7%CE%99%CE%9A%CE%95%CE%A3%20%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%9F%CE%A3/8-9%20%CE%94%CE%A1%CE%91%CE%A3%CE%A4%CE%97%CE%A1%CE%99%CE%9F%CE%A4%CE%97%CE%A4%CE%95%CE%A3%208%CE%BF%CF%85%20-9%CE%BF%CF%85%20%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%9F%CE%A3.pdf" class="pdf-card" target="_blank">
+                    <span class="pdf-icon">✏️</span>
+                    <div class="pdf-info">
+                        <div class="pdf-title">Μάθημα 8-9: Δραστηριότητες</div>
+                        <div class="pdf-folder">Αξιολόγηση</div>
+                    </div>
+                </a>
+                
+                <!-- Μάθημα 10 -->
+                <a href="pdf/%CE%91%CE%A1%CE%A7%CE%99%CE%9A%CE%95%CE%A3%20%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%9F%CE%A3/10%20Change%20Management.pdf" class="pdf-card" target="_blank">
+                    <span class="pdf-icon">📊</span>
+                    <div class="pdf-info">
+                        <div class="pdf-title">Μάθημα 10: Change Management</div>
+                        <div class="pdf-folder">Διαχείριση Αλλαγής</div>
+                    </div>
+                </a>
+                
+                <a href="pdf/%CE%91%CE%A1%CE%A7%CE%99%CE%9A%CE%95%CE%A3%20%CE%9C%CE%91%CE%98%CE%97%CE%9C%CE%91%CE%A4%CE%9F%CE%A3/10-11%20%CE%94%CE%A1%CE%91%CE%A3%CE%A4%CE%97%CE%A1%CE%99%CE%9F%CE%A4%CE%97%CE%A4%CE%95%CE%A3%2010-11.pdf" class="pdf-card" target="_blank">
+                    <span class="pdf-icon">✏️</span>
+                    <div class="pdf-info">
+                        <div class="pdf-title">Μάθημα 10-11: Δραστηριότητες</div>
+                        <div class="pdf-folder">Αλλαγή & Παρακίνηση</div>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Info Box -->
+            <div class="highlight-box" style="margin-top: 30px;">
+                <strong>💡 Συμβουλή:</strong> Χρησιμοποίησε την αναζήτηση πάνω για να βρεις γρήγορα το αρχείο που χρειάζεσαι. 
+                Τα PDFs ανοίγουν σε νέα καρτέλα για εύκολη ανάγνωση.
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <footer class="notes-footer">
+            <p>📚 Υλικό Μαθήματος - Διοίκηση Εκπαίδευσης | Πανεπιστήμιο Πατρών</p>
+        </footer>
+    </div>
+    
+    <!-- Search Script -->
+    <script>
+        document.getElementById('searchBox').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const cards = document.querySelectorAll('.pdf-card');
+            
+            cards.forEach(card => {
+                const title = card.querySelector('.pdf-title').textContent.toLowerCase();
+                const folder = card.querySelector('.pdf-folder').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || folder.includes(searchTerm)) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
