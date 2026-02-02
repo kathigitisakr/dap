@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Οδηγός Μαθήματος | Διοίκηση Εκπαίδευσης</title>
+    <link rel="stylesheet" href="study-notes.css">
+    <style>
+        .master-container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+
+        .master-header {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            border-radius: 20px;
+            margin-bottom: 3rem;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .master-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+        }
+
+        .master-header .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+        }
+
+        .course-info {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* NEW: Highlighted Resource Buttons */
+        .resource-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .resource-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2.5rem 3rem;
+            background: white;
+            border-radius: 15px;
+            text-decoration: none;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            min-width: 300px;
+            border-top: 5px solid transparent;
+        }
+
+        .resource-btn.pdf-library {
+            border-top-color: #667eea;
+        }
+
+        .resource-btn.additional-resources {
+            border-top-color: #f093fb;
+        }
+
+        .resource-btn:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+        }
+
+        .resource-btn .icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .resource-btn h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.8rem;
+            color: #2c3e50;
+        }
+
+        .resource-btn p {
+            font-size: 1rem;
+            color: #6c757d;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .resource-btn .badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: #28a745;
+            color: white;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            font-weight: 600;
+        }
+
+        .section-divider {
+            text-align: center;
+            margin: 4rem 0 3rem;
+            position: relative;
+        }
+
+        .section-divider h2 {
+            display: inline-block;
+            background: white;
+            padding: 0 2rem;
+            font-size: 2rem;
+            color: #2c3e50;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #667eea, transparent);
+        }
+
+        .units-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .unit-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-left: 5px solid #667eea;
+        }
+
+        .unit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .unit-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .unit-card h3 {
+            color: #2c3e50;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .unit-card p {
+            color: #6c757d;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .unit-link {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .unit-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .info-box {
+            background: #f8f9fa;
+            border-left: 5px solid #28a745;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .info-box h3 {
+            color: #28a745;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .master-header h1 {
+                font-size: 2rem;
+            }
+            
+            .resource-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .resource-btn {
+                min-width: 100%;
+            }
+            
+            .units-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="master-container">
+    
+    <!-- HEADER -->
+    <div class="master-header">
+        <h1>📘 Οδηγός Μαθήματος</h1>
+        <p class="subtitle">Διοίκηση Εκπαίδευσης | Μεταπτυχιακό Πρόγραμμα</p>
+        <p class="course-info">Πανεπιστήμιο Πατρών | MST351 | 8 Θεματικές Ενότητες</p>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- NEW: RESOURCE BUTTONS SECTION -->
+    <!-- ============================================ -->
+    
+    <div class="resource-buttons">
+        
+        <!-- PDF LIBRARY BUTTON -->
+        <a href="pdf_library.html" class="resource-btn pdf-library">
+            <span class="icon">📚</span>
+            <h3>Βιβλιοθήκη PDF</h3>
+            <p>Όλο το υλικό του μαθήματος<br>σε μορφή PDF οργανωμένο<br>σε φακέλους</p>
+            <span class="badge">✓ Έτοιμο προς χρήση</span>
+        </a>
+
+        <!-- ADDITIONAL RESOURCES BUTTON -->
+        <a href="additional_resources.html" class="resource-btn additional-resources">
+            <span class="icon">🌐</span>
+            <h3>Πρόσθετοι Πόροι</h3>
+            <p>Videos, Άρθρα, Online Courses<br>& Εργαλεία Μελέτης από<br>όλο τον κόσμο</p>
+            <span class="badge">🔥 Προτεινόμενο</span>
+        </a>
+
+    </div>
+
+    <!-- ============================================ -->
+    <!-- UNITS SECTION -->
+    <!-- ============================================ -->
+    
+    <div class="section-divider">
+        <h2>📖 Οι 8 Θεματικές Ενότητες</h2>
+    </div>
+
+    <div class="info-box">
+        <h3>💡 Πώς να χρησιμοποιήσεις τον οδηγό:</h3>
+        <p>
+            <strong>1.</strong> Διάβασε κάθε ενότητα από τις παρακάτω σελίδες (HTML format)<br>
+            <strong>2.</strong> Κατέβασε τα PDF από τη Βιβλιοθήκη για εκτύπωση & offline μελέτη<br>
+            <strong>3.</strong> Εμπλουτίστε τη γνώση σου με τους Πρόσθετους Πόρους<br>
+            <strong>4.</strong> Λύσε τα παλιά θέματα με χρονόμετρο για προετοιμασία εξετάσεων
+        </p>
+    </div>
+
+    <div class="units-grid">
+        
+        <!-- UNIT 1 -->
+        <div class="unit-card">
+            <span class="unit-number">ΕΝΟΤΗΤΑ 1</span>
+            <h3>Ηγεσία & Διοίκηση</h3>
+            <p>Βασικές έννοιες, θεωρίες (Goleman, Blake & Mouton), στυλ ηγεσίας και εφαρμογή στην εκπαιδευτική διοίκηση.</p>
+            <a href="enothta_1_hgesia_dioikisi.html" class="unit-link">📖 Μελέτησε την Ενότητα</a>
+        </div>
+
+        <!-- UNIT 2 -->
+        <div class="unit-card">
+            <span class="unit-number">ΕΝΟΤΗΤΑ 2</span>
+            <h3>Σχολείο ως Οργανισμός</h3>
+            <p>Οργανωσιακή δομή, κουλτούρα σχολείου, θεωρίες οργάνωσης και μοντέλα διοίκησης σχολικής μονάδας.</p>
+            <a href="enothta_2_sxoleio_organismos.html" class="unit-link">📖 Μελέτησε την Ενότητα</a>
+        </div>
+
+        <!-- UNIT 3 -->
+        <div class="unit-card">
+            <span class="unit-number">ΕΝΟΤΗΤΑ 3</span>
+            <h3>Οργανισμός Μάθησης</h3>
+            <p>Peter Senge, 5 Πειθαρχίες, μαθησιακή οργάνωση, συστημική σκέψη και εφαρμογή στο σχολείο.</p>
+            <a href="enothta_3_organismos_mathisis.html" class="unit-link">📖 Μελέτησε την Ενότητα</a>
+        </div>
+
+        <!-- UNIT 4 -->
+        <div class="unit-card">
+            <span class="unit-number">ΕΝΟΤΗΤΑ 4</span>
+            <h3>Επικοινωνία & Συγκρούσεις</h3>
+            <p>Είδη επικοινωνίας, διαχείριση συγκρούσεων (Thomas-Kilmann), διαπραγμάτευση και πρακτικές λύσεις.</p>
+            <a href="enothta_4_epikoinonia_sygkrouseis.html" class="unit-link">📖 Μελέτησε την Ενότητα</a>
+        </div>
+
+        <!-- UNIT 5 -->
+        <div class="unit-card">
+            <span class="unit-number">ΕΝΟΤΗΤΑ 5</span>
+            <h3>Συναισθηματική Νοημοσύνη</h3>
+            <p>Goleman's EI μοντέλο, 5 συστατικά, αυτογνωσία, αυτοδιαχείριση και εφαρμογές στην εκπαίδευση.</p>
+            <a href="enothta_5_synaisthimatiki_noimosyni.html" class="unit-link">📖 Μελέτησε την Ενότητα</a>
+        </div>
+
+        <!-- UNIT 6 -->
+        <div class="unit-card">
+            <span class="unit-number">ΕΝΟΤΗΤΑ 6</span>
+            <h3>Αξιολόγηση</h3>
+            <p>Αυτοαξιολόγηση, εξωτερική αξιολόγηση, OECD μοντέλο, κριτήρια & δείκτες ποιότητας εκπαίδευσης.</p>
+            <a href="enothta_6_axiologisi.html" class="unit-link">📖 Μελέτησε την Ενότητα</a>
+        </div>
+
+        <!-- UNIT 7 -->
+        <div class="unit-card">
+            <span class="unit-number">ΕΝΟΤΗΤΑ 7</span>
+            <h3>Διαχείριση Αλλαγής</h3>
+            <p>Kotter's 8 βήματα, αντιστάσεις στην αλλαγή, στρατηγικές υλοποίησης και οδηγοί αλλαγής.</p>
+            <a href="enothta_7_diaxeirisi_allagis.html" class="unit-link">📖 Μελέτησε την Ενότητα</a>
+        </div>
+
+        <!-- UNIT 8 -->
+        <div class="unit-card">
+            <span class="unit-number">ΕΝΟΤΗΤΑ 8</span>
+            <h3>Παρακίνηση</h3>
+            <p>Θεωρίες παρακίνησης (Maslow, Herzberg), εσωτερική/εξωτερική παρακίνηση και στρατηγικές για εκπαιδευτικούς.</p>
+            <a href="enothta_8_parakinisi.html" class="unit-link">📖 Μελέτησε την Ενότητα</a>
+        </div>
+
+    </div>
+
+    <!-- ============================================ -->
+    <!-- EXAM PREPARATION INFO -->
+    <!-- ============================================ -->
+    
+    <div class="info-box" style="border-left-color: #dc3545;">
+        <h3 style="color: #dc3545;">🎯 Προετοιμασία για Εξετάσεις</h3>
+        <p>
+            <strong>Δομή Απαντήσεων:</strong> Χρησιμοποίησε τη μέθοδο <strong>ΕΙΕΣ</strong>
+            (Εισαγωγή - Ιστορική/Θεωρητική Προσέγγιση - Εφαρμογή - Σύνοψη)<br><br>
+            
+            <strong>Σημαντικό:</strong> Κάθε ενότητα περιλαμβάνει:<br>
+            • Θεωρητικό πλαίσιο με όλες τις βασικές θεωρίες<br>
+            • Πρακτικά παραδείγματα από την ελληνική πραγματικότητα<br>
+            • Mnemonic devices για εύκολη απομνημόνευση<br>
+            • Πιθανά θέματα εξετάσεων με υποδείγματα απαντήσεων
+        </p>
+    </div>
+
+    <!-- FOOTER -->
+    <div style="text-align: center; margin-top: 4rem; padding: 2rem; background: #f8f9fa; border-radius: 10px;">
+        <p style="color: #6c757d; margin-bottom: 1rem;">
+            <strong>💪 Καλή Επιτυχία στις Εξετάσεις!</strong>
+        </p>
+        <p style="color: #6c757d; font-size: 0.9rem;">
+            Δημιουργήθηκε με 💙 για το Μεταπτυχιακό Πρόγραμμα Διοίκησης Εκπαίδευσης<br>
+            Πανεπιστήμιο Πατρών | 2025
+        </p>
+    </div>
+
+</div>
+
+</body>
+</html>
